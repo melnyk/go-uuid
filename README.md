@@ -3,17 +3,19 @@
 [![latest][latest-img]][latest-link]
 
 
-Package uuid is a Go library that provides a very simple interface to generate and marshal UUIDs. UUIDs are universally unique identifiers that are based on RFC 4122 and are 128 bit (16 byte) values that can be generated as Version 4 random or pseudo-random id. This package supports both binary and text encoding of UUIDs, as well as parsing them. 
+Package uuid is a Go library that provides a very simple interface to generate and marshal UUIDs. UUIDs are universally unique identifiers that are based on RFC 4122 and are 128 bit (16 byte) values that can be generated as Version 4 random or pseudo-random id. This package supports both binary and text encoding of UUIDs, as well as parsing them.
 The main features of this package are:
 
 - Easy to use: just import the package and call uuid.New() to get a new random UUID.
 - Fast and secure: the package uses crypto/rand to generate random bytes for the UUIDs, ensuring high quality randomness and avoiding collisions.
-- Flexible and interoperable: the package supports canonical string formats. 
+- Flexible and interoperable: the package supports canonical string formats.
 - Compatible and consistent: the package follows the RFC 4122 specification and produces UUIDs that are compatible with other implementations and languages. The package also guarantees that the same UUID will always be encoded and decoded in the same way, regardless of the format.
 
 To use this package, simply import it in your Go code:
 
+```
 import "go.melnyk.org/uuid"
+```
 
 Then you can create a new random UUID by calling uuid.New():
 
