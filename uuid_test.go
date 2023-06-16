@@ -43,6 +43,14 @@ func ExampleParse() {
 	// Output: 12345678-1234-1234-abcd-123456789012
 }
 
+func TestNewTimeBased(t *testing.T) {
+	id1 := NewTimeBased()
+	id2 := NewTimeBased()
+	if id1.Equal(id2) {
+		t.Error("NewTimeBased() returned non-unique UUIDs")
+	}
+}
+
 func TestParse(t *testing.T) {
 	var good []string = []string{
 		"12345678-1234-1234-aBcD-123456789012",

@@ -22,6 +22,11 @@ Then you can create a new random UUID by calling uuid.New():
 ```
 id := uuid.New()
 ```
+or partially time-based with 74 random bits by calling uuid.NewTimeBased():
+```
+id := uuid.NewTimeBased()
+```
+
 
 To parse a UUID from a string or byte slice, use uuid.Parse():
 

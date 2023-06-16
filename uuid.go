@@ -5,6 +5,7 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"errors"
+	"time"
 )
 
 // UUID represents a 128-bit Universal Unique Identifier as defined in RFC 4122.
@@ -24,6 +25,30 @@ func New() UUID {
 
 	// Set all bits to randomly (or pseudo-randomly) chosen values.
 	_, _ = rand.Read(uuid[:]) // Ignore error
+
+	// Set the bits as described by RFC 4122.
+	uuid[6] = (uuid[6] & 0x0f) | 0x40 // Version 4
+	uuid[8] = (uuid[8] & 0x3f) | 0x80 // Variant 10
+
+	return uuid
+}
+
+func NewTimeBased() UUID {
+	// Return time-based UUID - described in RFC 4122 as Version 4 with first 6 bytes as Unix timestamp.
+
+	var uuid UUID
+
+	// Set first 6 bytes to Unix timestamp.
+	tm := time.Now().UnixMilli()
+	uuid[0] = byte(tm >> 40)
+	uuid[1] = byte(tm >> 32)
+	uuid[2] = byte(tm >> 24)
+	uuid[3] = byte(tm >> 16)
+	uuid[4] = byte(tm >> 8)
+	uuid[5] = byte(tm)
+
+	// Set rest of bits to randomly (or pseudo-randomly) chosen values.
+	_, _ = rand.Read(uuid[6:]) // Ignore error
 
 	// Set the bits as described by RFC 4122.
 	uuid[6] = (uuid[6] & 0x0f) | 0x40 // Version 4
