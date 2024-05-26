@@ -3,6 +3,7 @@ package uuid
 import (
 	"fmt"
 	"testing"
+	"time"
 )
 
 // Test for Equal() method
@@ -45,9 +46,24 @@ func ExampleParse() {
 
 func TestNewTimeBased(t *testing.T) {
 	id1 := NewTimeBased()
-	id2 := NewTimeBased()
-	if id1.Equal(id2) {
-		t.Error("NewTimeBased() returned non-unique UUIDs")
+	for i := 0; i < 100000; i++ {
+		id2 := NewTimeBased()
+		if id1.Equal(id2) {
+			t.Error("NewTimeBased() returned non-unique UUIDs")
+			break
+		}
+	}
+}
+
+func TestNewTimeBasedSequenced(t *testing.T) {
+	for i := 0; i < 1000; i++ {
+		id1 := NewTimeBased()
+		time.Sleep(time.Nanosecond * 1000)
+		id2 := NewTimeBased()
+		if id1.Compare(id2) != -1 {
+			t.Errorf("NewTimeBased() returned non-sequenced UUIDs: %v > %v", id1, id2)
+			break
+		}
 	}
 }
 
