@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+> The Go team introduced a standard UUID implementation in Go 1.27. As a result, this implementation has been moved to archive status.
+> Please migrate to the standard implementation.
+
 # go-uuid
 [![License][license-img]][license] [![Actions Status][action-img]][action] [![PkgGoDev][pkggodev-img]][pkggodev] [![Go Report Card][goreport-img]][goreport] [![Coverage Status][codecov-img]][codecov]
 [![latest][latest-img]][latest-link]
